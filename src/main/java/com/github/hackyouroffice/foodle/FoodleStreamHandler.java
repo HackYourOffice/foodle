@@ -1,7 +1,12 @@
 package com.github.hackyouroffice.foodle;
 
 import com.amazon.speech.speechlet.lambda.SpeechletRequestStreamHandler;
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
+import com.github.hackyouroffice.foodle.storage.LocationsDynamoDbClient;
 
+import java.time.Clock;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,6 +18,10 @@ public final class FoodleStreamHandler extends SpeechletRequestStreamHandler {
     private static final KnownLocationsLunchLocationFinder knownLocationsLunchLocationFinder = new KnownLocationsLunchLocationFinder();
     private static final LunchProposer lunchProposer;
 
+    private static final LocationsDynamoDbClient locationsDynamoDbClient;
+
+    private static final AmazonDynamoDBClient dynamoDbClient;
+
     static {
         /*
          * This Id can be found on https://developer.amazon.com/edw/home.html#/ "Edit" the relevant
@@ -21,7 +30,10 @@ public final class FoodleStreamHandler extends SpeechletRequestStreamHandler {
         supportedApplicationIds = new HashSet<>();
         supportedApplicationIds.add("amzn1.ask.skill.b45229b9-9bf2-47b6-9817-333769c167e4");
         googlePlacesLunchLocationFinder = new GooglePlacesLunchLocationFinder(foodleProperties);
-        lunchProposer = new LunchProposer(googlePlacesLunchLocationFinder, knownLocationsLunchLocationFinder);
+        AWSCredentials awsCredentials = new BasicAWSCredentials(foodleProperties.getAwsAccessKey(), foodleProperties.getAwsSecretKey());
+        dynamoDbClient = new AmazonDynamoDBClient(awsCredentials);
+        locationsDynamoDbClient = new LocationsDynamoDbClient(dynamoDbClient);
+        lunchProposer = new LunchProposer(googlePlacesLunchLocationFinder, knownLocationsLunchLocationFinder, locationsDynamoDbClient, Clock.systemDefaultZone());
     }
 
     public FoodleStreamHandler() {

@@ -36,4 +36,13 @@ public class FoodleProperties {
     public int getFoodleLocationRadius() {
         return Integer.parseInt(properties.getProperty("foodle.location.radius"));
     }
+
+    public String getAwsSecretKey() {
+        return properties.getProperty("foodle.aws.secretkey");
+    }
+
+    public String getAwsAccessKey() {
+        return properties.getProperty("foodle.aws.accesskey");
+    }
+
 }
