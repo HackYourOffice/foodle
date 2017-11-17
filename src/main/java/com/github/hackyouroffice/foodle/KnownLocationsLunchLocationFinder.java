@@ -8,17 +8,18 @@ public class KnownLocationsLunchLocationFinder implements LocationFinder {
     private final List<Location> locations;
 
     public KnownLocationsLunchLocationFinder() {
-        this.locations = new ArrayList<>();
-        this.locations.add(new Location("Ritter"));
-        this.locations.add(new Location("Kaufland Asiat"));
-        this.locations.add(new Location("Kaufland Döner"));
-        this.locations.add(new Location("Anderer Döner"));
-        this.locations.add(new Location("Papparazi"));
-        this.locations.add(new Location("Curry76"));
-        this.locations.add(new Location("Thai"));
-        this.locations.add(new Location("Bäcker"));
-        this.locations.add(new Location("Grieche"));
-        this.locations.add(new Location("Lörz"));
+        locations = new ArrayList<>();
+
+        String kauflandAdresse = "Carl-Metz-Straße 7, 76185 Karlsruhe";
+        locations.add(new Location("Ritter", "Hardtstraße 25, 76185 Karlsruhe", 60, true, false));
+        locations.add(new Location("Kaufland Asiat", kauflandAdresse, 20, true, false));
+        locations.add(new Location("Kaufland Döner", kauflandAdresse, 20, true, false));
+        locations.add(new Location("Anderer Döner", kauflandAdresse, 35, true, false));
+        locations.add(new Location("Curry76", "Rheinstraße 28, 76185 Karlsruhe", 25, true, false));
+        locations.add(new Location("Thai", "Eckenerstraße 1, 76185 Karlsruhe", 60, true, false));
+        locations.add(new Location("Bäcker", kauflandAdresse, 5, true, false));
+        locations.add(new Location("Grieche", "Am Sonnenbad 1, 76189 Karlsruhe", 60, true, false));
+        locations.add(new Location("Lörz", "Hardtstraße 10, 76185 Karlsruhe", 5, true, false));
     }
 
     @Override

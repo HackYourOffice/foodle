@@ -2,19 +2,20 @@ package com.github.hackyouroffice.foodle;
 
 public class Proposal {
 
-  private final String title;
-  private final String text;
+    private final String title;
 
-  public Proposal(String title, String text) {
-    this.title = title;
-    this.text = text;
-  }
+    private final Location location;
 
-  public String getTitle() {
-    return title;
-  }
+    public Proposal(String title, Location location) {
+        this.title = title;
+        this.location = location;
+    }
 
-  public String getText() {
-    return text;
-  }
+    public String getTitle() {
+        return title;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
 }
