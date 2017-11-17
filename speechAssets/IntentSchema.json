@@ -4,7 +4,13 @@
       "intent": "LunchProposal"
     },
     {
+      "intent": "LunchDistance"
+    },
+    {
       "intent": "UnhandledIntent"
+    },
+    {
+      "intent": "LunchRating"
     },
     {
       "intent": "AMAZON.HelpIntent"
