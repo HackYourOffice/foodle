@@ -53,7 +53,9 @@ public class GooglePlacesLunchLocationFinder implements LocationFinder {
         logger.info(String.format("Anzahl des Ergebnisses: %d", results.length));
 
         return Arrays.stream(results).map(x -> {
-            return new Location(x.name + ", hat gerade " + (!x.openingHours.openNow ? "nicht" : "") + " geöffnet");
+            return new Location(
+                    String.format("%s%s", x.name, (x.openingHours != null ?
+                            String.format("hat gerade %s geöffnet!", x.openingHours.openNow ? "" : "nicht") : "")));
         }).collect(Collectors.toList());
     }
 }
