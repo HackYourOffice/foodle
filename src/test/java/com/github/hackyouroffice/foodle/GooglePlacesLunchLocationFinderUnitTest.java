@@ -39,10 +39,10 @@ public class GooglePlacesLunchLocationFinderUnitTest {
         assertThat(locations.isEmpty(), is(false));
     }
 
-    @Test
     @Ignore
+    @Test
     public void calculateDistanceToLocation() {
-        Location location = new Location("die location", "Carl-Metz-Straße 7, 76185 Karlsruhe", 30, true, false);
+        Location location = new Location("die location", "Carl-Metz-Straße 7, 76185 Karlsruhe", 30, false);
 
         finder.calculateDistanceToLocation(location);
 

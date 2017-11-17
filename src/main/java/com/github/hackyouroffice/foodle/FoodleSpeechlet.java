@@ -3,11 +3,14 @@ package com.github.hackyouroffice.foodle;
 import com.amazon.speech.json.SpeechletRequestEnvelope;
 import com.amazon.speech.slu.Intent;
 import com.amazon.speech.speechlet.*;
+
 import com.amazon.speech.ui.OutputSpeech;
 import com.amazon.speech.ui.PlainTextOutputSpeech;
 import com.amazon.speech.ui.Reprompt;
 import com.amazon.speech.ui.SimpleCard;
 import com.google.gson.Gson;
+import com.amazon.speech.ui.*;
+
 
 public class FoodleSpeechlet implements SpeechletV2 {
 
@@ -52,14 +55,13 @@ public class FoodleSpeechlet implements SpeechletV2 {
 
         } else if (DISTANCE_INTEND_NAME.equals(intentName)) {
 
-            Proposal currentProposal = gson.fromJson((String) session.getAttribute("currentProposal"),Proposal.class);
+            Proposal currentProposal = getCurrentProposal(session);
             return getAskResponse("Distance", currentProposal.getWayTimeInfoText());
 
         } else if (DURATION_INTEND_NAME.equals(intentName)) {
 
-            Proposal currentProposal = gson.fromJson((String) session.getAttribute("currentProposal"),Proposal.class);
-
-            return getAskResponse("Duration", currentProposal.getAverageMinutesForEating());
+            Proposal currentProposal = getCurrentProposal(session);
+            return getAskResponse("Duration", currentProposal.getCompleteLunchDuration());
 
         } else if ("AMAZON.StopIntent".equals(intentName)) {
             PlainTextOutputSpeech outputSpeech = new PlainTextOutputSpeech();
@@ -74,6 +76,10 @@ public class FoodleSpeechlet implements SpeechletV2 {
         } else {
             return getAskResponse("Nicht Verstanden", "Aaaalter, sprichst du Hochdeutsch?");
         }
+    }
+
+    private Proposal getCurrentProposal(Session session) {
+        return gson.fromJson((String) session.getAttribute("currentProposal"),Proposal.class);
     }
 
     @Override

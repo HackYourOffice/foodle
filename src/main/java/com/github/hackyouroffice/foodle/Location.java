@@ -1,9 +1,6 @@
 package com.github.hackyouroffice.foodle;
 
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
 
 public class Location implements Serializable{
@@ -12,10 +9,9 @@ public class Location implements Serializable{
     private String address;
     private int averageMinutesForEating;
     private boolean openNow;
-    private boolean permanentlyClosed;
     private long wayTimeInMinutes = -1;
 
-    public Location(String name, String address, int averageMinutesForEating, boolean openNow, boolean permanentlyClosed) {
+    public Location(String name, String address, int averageMinutesForEating, boolean openNow) {
         this.name = name;
         this.address = address;
         this.averageMinutesForEating = averageMinutesForEating;
@@ -27,18 +23,6 @@ public class Location implements Serializable{
 
     public String getAddress() {
         return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public int getAverageMinutesForEating() {
-        return averageMinutesForEating;
-    }
-
-    public void setAverageMinutesForEating(int averageMinutesForEating) {
-        this.averageMinutesForEating = averageMinutesForEating;
     }
 
     public String getWayTimeInfoText() {
@@ -54,22 +38,13 @@ public class Location implements Serializable{
         wayTimeInMinutes = wayTime / 60;
     }
 
-    public String getTotalTimeNeededText() {
-        int time = getAverageMinutesForEating();
+    public String getCompleteLunchDuration() {
+        int time = averageMinutesForEating;
         if (wayTimeInMinutes != -1) {
             time += 2 * wayTimeInMinutes;
         }
 
-        List<String> texts = Arrays.asList(
-                "Normalerweise benötigst du dabei also insgesamt %d Minuten.",
-                "Die durchschnittliche Dauer für dieses Mittagessen wird %d Minuten betragen."
-        );
-
-        Collections.shuffle(texts);
-
-        final String selectedText = texts.get(0);
-
-        return String.format(selectedText, time);
+        return String.format("Normalerweise benötigst du dabei also insgesamt %d Minuten zum Essen inklusive Weegzeit ", time);
     }
 
     public long getWayTimeInMinutes() {

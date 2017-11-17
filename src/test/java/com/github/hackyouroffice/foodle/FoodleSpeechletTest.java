@@ -25,7 +25,7 @@ public class FoodleSpeechletTest {
 
     when(lunchProposer.getProposal()).thenReturn(
             new Proposal("foo",
-                    new Location("bar", "address", 1, true, false),"blubb"
+                    new Location("bar", "address", 1, true),"blubb"
             ));
 
     final FoodleSpeechlet foodleSpeechlet = new FoodleSpeechlet(lunchProposer);
