@@ -10,6 +10,8 @@ import com.amazon.speech.ui.SimpleCard;
 
 public class FoodleSpeechlet implements SpeechletV2 {
 
+  private static final String GENERAL_FOOD_INTEND_NAME = "LunchProposal";
+
   private final KnownLocationsLunchProposer knownLocationsLunchProposer;
 
   public FoodleSpeechlet(KnownLocationsLunchProposer knownLocationsLunchProposer) {
@@ -30,13 +32,11 @@ public class FoodleSpeechlet implements SpeechletV2 {
   public SpeechletResponse onIntent(SpeechletRequestEnvelope<IntentRequest> speechletRequestEnvelope) {
 
     IntentRequest request = speechletRequestEnvelope.getRequest();
-//    log.info("onIntent requestId={}, sessionId={}", request.getRequestId(),
-//        requestEnvelope.getSession().getSessionId());
 
     Intent intent = request.getIntent();
     String intentName = (intent != null) ? intent.getName() : null;
 
-    if ("LunchProposal".equals(intentName)) {
+    if (GENERAL_FOOD_INTEND_NAME.equals(intentName)) {
 
       Proposal proposal = knownLocationsLunchProposer.propose();
 
