@@ -16,21 +16,25 @@ public class GooglePlacesLunchLocationFinder implements LocationFinder {
 
     private static final Logger logger = LoggerFactory.getLogger(GooglePlacesLunchLocationFinder.class);
     private final GeoApiContext geoApiContext;
+    private final LatLng latLng;
+    private final int radius;
 
     public GooglePlacesLunchLocationFinder(FoodleProperties foodleProperties) {
-        this.geoApiContext = new GeoApiContext.Builder()
-            .apiKey(foodleProperties.getGoogleMapsApiKey())
-            .build();
+        geoApiContext = new GeoApiContext.Builder()
+                .apiKey(foodleProperties.getGoogleMapsApiKey())
+                .build();
 
+        latLng = new LatLng(foodleProperties.getFoodleLocationLat(), foodleProperties.getFoodleLocationLng());
+        radius = foodleProperties.getFoodleLocationRadius();
     }
 
     @Override
     public List<Location> findLocations() {
         NearbySearchRequest request =
-            PlacesApi.nearbySearchQuery(geoApiContext, new LatLng(49.010065, 8.353095))
-                .openNow(true)
-                .radius(100) // Meter
-                .type(PlaceType.FOOD, PlaceType.RESTAURANT);
+                PlacesApi.nearbySearchQuery(geoApiContext, latLng)
+                        .openNow(true)
+                        .radius(radius) // Meter
+                        .type(PlaceType.FOOD, PlaceType.RESTAURANT);
 
         PlacesSearchResult[] results;
 
