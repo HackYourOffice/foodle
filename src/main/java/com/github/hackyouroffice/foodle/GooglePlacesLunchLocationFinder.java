@@ -34,7 +34,7 @@ public class GooglePlacesLunchLocationFinder implements LocationFinder {
     public List<Location> findLocations() {
         NearbySearchRequest request =
                 PlacesApi.nearbySearchQuery(geoApiContext, latLng)
-                        .openNow(true)
+                        //.openNow(false)
                         .radius(radius) // Meter
                         .type(PlaceType.FOOD, PlaceType.RESTAURANT);
 
@@ -43,12 +43,15 @@ public class GooglePlacesLunchLocationFinder implements LocationFinder {
         try {
             results = request.await().results;
         } catch (Exception e) {
+            logger.info("Die Liste von Google war leer");
             e.printStackTrace();
             return Collections.emptyList();
         }
 
-        logger.info(String.format("Anzahl des Ergebnisses: %d", results.length));
+        logger.error(String.format("Anzahl des Ergebnisses: %d", results.length));
 
-        return Arrays.stream(results).map(x -> new Location(x.name)).collect(Collectors.toList());
+        return Arrays.stream(results).map(x -> {
+            return new Location(x.name);
+        }).collect(Collectors.toList());
     }
 }
