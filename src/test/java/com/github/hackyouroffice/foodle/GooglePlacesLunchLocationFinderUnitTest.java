@@ -35,6 +35,7 @@ public class GooglePlacesLunchLocationFinderUnitTest {
         assertThat(locations.isEmpty(), is(false));
     }
 
+    @Ignore
     @Test
     public void calculateDistanceToLocation() {
         when(properties.getGoogleMapsApiKey()).thenReturn(API_KEY);
