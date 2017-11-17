@@ -22,6 +22,8 @@ public class GooglePlacesLunchLocationFinder implements LocationFinder {
     private final int radius;
 
     public GooglePlacesLunchLocationFinder(FoodleProperties foodleProperties) {
+        logger.info(String.format("Google API Key: %s", foodleProperties.getGoogleMapsApiKey()));
+
         geoApiContext = new GeoApiContext.Builder()
                 .apiKey(foodleProperties.getGoogleMapsApiKey())
                 .build();
@@ -48,10 +50,10 @@ public class GooglePlacesLunchLocationFinder implements LocationFinder {
             return Collections.emptyList();
         }
 
-        logger.error(String.format("Anzahl des Ergebnisses: %d", results.length));
+        logger.info(String.format("Anzahl des Ergebnisses: %d", results.length));
 
         return Arrays.stream(results).map(x -> {
-            return new Location(x.name);
+            return new Location(x.name + ", hat gerade " + (!x.openingHours.openNow ? "nicht" : "") + " geöffnet");
         }).collect(Collectors.toList());
     }
 }
