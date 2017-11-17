@@ -38,7 +38,7 @@ public class GooglePlacesLunchLocationFinder implements LocationFinder {
                 PlacesApi.nearbySearchQuery(geoApiContext, latLng)
                         //.openNow(false)
                         .radius(radius) // Meter
-                        .type(PlaceType.FOOD, PlaceType.RESTAURANT);
+                        .type(PlaceType.RESTAURANT);
 
         PlacesSearchResult[] results;
 
