@@ -55,13 +55,12 @@ public class FoodleSpeechlet implements SpeechletV2 {
 
         } else if (DISTANCE_INTEND_NAME.equals(intentName)) {
 
-            Proposal currentProposal = gson.fromJson((String) session.getAttribute("currentProposal"),Proposal.class);
+            Proposal currentProposal = getCurrentProposal(session);
             return getAskResponse("Distance", currentProposal.getWayTimeInfoText());
 
         } else if (DURATION_INTEND_NAME.equals(intentName)) {
 
-            Proposal currentProposal = gson.fromJson((String) session.getAttribute("currentProposal"),Proposal.class);
-
+            Proposal currentProposal = getCurrentProposal(session);
             return getAskResponse("Duration", currentProposal.getCompleteLunchDuration());
 
         } else if ("AMAZON.StopIntent".equals(intentName)) {
@@ -77,6 +76,10 @@ public class FoodleSpeechlet implements SpeechletV2 {
         } else {
             return getAskResponse("Nicht Verstanden", "Aaaalter, sprichst du Hochdeutsch?");
         }
+    }
+
+    private Proposal getCurrentProposal(Session session) {
+        return gson.fromJson((String) session.getAttribute("currentProposal"),Proposal.class);
     }
 
     @Override
