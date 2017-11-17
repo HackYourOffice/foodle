@@ -44,7 +44,7 @@ public class Location implements Serializable{
             time += 2 * wayTimeInMinutes;
         }
 
-        return String.format("Normalerweise benötigst du dabei also insgesamt %d Minuten zum Essen inklusive Weegzeit ", time);
+        return String.format("Normalerweise benötigst du dabei insgesamt %d Minuten zum Essen inklusive Weegzeit ", time);
     }
 
     public long getWayTimeInMinutes() {
