@@ -1,6 +1,9 @@
 package com.github.hackyouroffice.foodle;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 public class Location implements Serializable{
@@ -43,7 +46,8 @@ public class Location implements Serializable{
             return "Ich kenne den Weg leider nicht so genau und weiss nicht wie lange du brauchst.";
         }
 
-        return String.format("Du wirst in etwa %d Minuten benötigen um dahin zu kommen. ", wayTimeInMinutes);
+        final String selectedText = "Du wirst in etwa %d Minuten benötigen um dahin zu kommen.";
+        return String.format(selectedText, wayTimeInMinutes);
     }
 
     public void setWayTimeInSeconds(long wayTime) {
@@ -56,7 +60,16 @@ public class Location implements Serializable{
             time += 2 * wayTimeInMinutes;
         }
 
-        return String.format("Normalerweise benötigst du dabei also insgesamt %d Minuten. ", time);
+        List<String> texts = Arrays.asList(
+                "Normalerweise benötigst du dabei also insgesamt %d Minuten.",
+                "Die durchschnittliche Dauer für dieses Mittagessen wird %d Minuten betragen."
+        );
+
+        Collections.shuffle(texts);
+
+        final String selectedText = texts.get(0);
+
+        return String.format(selectedText, time);
     }
 
     public long getWayTimeInMinutes() {
