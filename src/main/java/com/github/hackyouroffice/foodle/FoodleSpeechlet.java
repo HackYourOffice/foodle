@@ -43,23 +43,22 @@ public class FoodleSpeechlet implements SpeechletV2 {
         if (GENERAL_FOOD_INTEND_NAME.equals(intentName)) {
 
             Proposal proposal = lunchProposer.getProposal();
-            ProposalPrefixTextRandomizer prefixForProposal = new ProposalPrefixTextRandomizer();
 
             session.setAttribute("currentProposal", proposal);
 
-            return getAskResponse(proposal.getTitle(), prefixForProposal.randomTextPrefix() + proposal.getLocation().getName());
+            return getAskResponse(proposal.getTitle(), proposal.getSpeechText());
 
         } else if (DISTANCE_INTEND_NAME.equals(intentName)) {
 
             Proposal currentProposal = (Proposal) session.getAttribute("currentProposal");
 
-            return getAskResponse("Distance", currentProposal.getLocation().getWayTimeInfoText());
+            return getAskResponse("Distance", currentProposal.getWayTimeInfoText());
 
         } else if (DURATION_INTEND_NAME.equals(intentName)) {
 
             Proposal currentProposal = (Proposal) session.getAttribute("currentProposal");
 
-            return getAskResponse("Duration", "Essen da dauert so lange: " + currentProposal.getLocation().getAverageMinutesForEating());
+            return getAskResponse("Duration", currentProposal.getAverageMinutesForEating());
 
         } else if ("AMAZON.StopIntent".equals(intentName)) {
             PlainTextOutputSpeech outputSpeech = new PlainTextOutputSpeech();

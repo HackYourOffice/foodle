@@ -26,9 +26,12 @@ public class LunchProposerTest {
     @Mock
     private KnownLocationsLunchLocationFinder knownLocationsLunchLocationFinder;
 
+    @Mock
+    private ProposalPrefixTextRandomizer proposalPrefixTextRandomizer;
+
     @Before
     public void setup() {
-        lunchProposer = new LunchProposer(googlePlacesLunchLocationFinder, knownLocationsLunchLocationFinder);
+        lunchProposer = new LunchProposer(googlePlacesLunchLocationFinder, knownLocationsLunchLocationFinder, proposalPrefixTextRandomizer);
     }
 
     @Test
@@ -36,10 +39,11 @@ public class LunchProposerTest {
 
         when(knownLocationsLunchLocationFinder.findLocations()).thenReturn(Arrays.asList(new Location("a", "",0,true,false)));
         when(googlePlacesLunchLocationFinder.findLocations()).thenReturn(Arrays.asList(new Location("b","",0,true,false)));
+        when(proposalPrefixTextRandomizer.randomTextPrefix()).thenReturn("blubb");
 
         final Proposal proposal = lunchProposer.getProposal();
 
-        assertThat(proposal.getLocation().getName(), is(anything()));
+        assertThat(proposal.getSpeechText(), is(anything()));
 
         verify(googlePlacesLunchLocationFinder).findLocations();
         verify(knownLocationsLunchLocationFinder).findLocations();

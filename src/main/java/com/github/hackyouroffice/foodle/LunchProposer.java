@@ -13,10 +13,15 @@ public class LunchProposer {
 
     private final GooglePlacesLunchLocationFinder googlePlacesLunchLocationFinder;
     private final KnownLocationsLunchLocationFinder knownLocationsLunchLocationFinder;
+    private final ProposalPrefixTextRandomizer proposalPrefixTextRandomizer;
 
-    public LunchProposer(GooglePlacesLunchLocationFinder googlePlacesLunchLocationFinder, KnownLocationsLunchLocationFinder knownLocationsLunchLocationFinder) {
+    public LunchProposer(GooglePlacesLunchLocationFinder googlePlacesLunchLocationFinder,
+                         KnownLocationsLunchLocationFinder knownLocationsLunchLocationFinder,
+                         ProposalPrefixTextRandomizer proposalPrefixTextRandomizer) {
+
         this.googlePlacesLunchLocationFinder = googlePlacesLunchLocationFinder;
         this.knownLocationsLunchLocationFinder = knownLocationsLunchLocationFinder;
+        this.proposalPrefixTextRandomizer = proposalPrefixTextRandomizer;
     }
 
     public Proposal getProposal() {
@@ -34,6 +39,6 @@ public class LunchProposer {
 
         googlePlacesLunchLocationFinder.calculateDistanceToLocation(selectedLocation);
 
-        return new Proposal("Essensvorschlag", selectedLocation);
+        return new Proposal("Essensvorschlag", selectedLocation, proposalPrefixTextRandomizer.randomTextPrefix());
     }
 }

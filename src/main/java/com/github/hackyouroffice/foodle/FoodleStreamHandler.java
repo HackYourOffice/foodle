@@ -11,6 +11,7 @@ public final class FoodleStreamHandler extends SpeechletRequestStreamHandler {
     private static final FoodleProperties foodleProperties = new FoodleProperties();
     private static final GooglePlacesLunchLocationFinder googlePlacesLunchLocationFinder;
     private static final KnownLocationsLunchLocationFinder knownLocationsLunchLocationFinder = new KnownLocationsLunchLocationFinder();
+    private static  final ProposalPrefixTextRandomizer proposalPrefixTextRandomizer = new ProposalPrefixTextRandomizer();
     private static final LunchProposer lunchProposer;
 
     static {
@@ -21,7 +22,7 @@ public final class FoodleStreamHandler extends SpeechletRequestStreamHandler {
         supportedApplicationIds = new HashSet<>();
         supportedApplicationIds.add("amzn1.ask.skill.b45229b9-9bf2-47b6-9817-333769c167e4");
         googlePlacesLunchLocationFinder = new GooglePlacesLunchLocationFinder(foodleProperties);
-        lunchProposer = new LunchProposer(googlePlacesLunchLocationFinder, knownLocationsLunchLocationFinder);
+        lunchProposer = new LunchProposer(googlePlacesLunchLocationFinder, knownLocationsLunchLocationFinder,proposalPrefixTextRandomizer);
     }
 
     public FoodleStreamHandler() {
