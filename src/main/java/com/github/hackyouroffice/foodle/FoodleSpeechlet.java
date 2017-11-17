@@ -24,7 +24,7 @@ public class FoodleSpeechlet implements SpeechletV2 {
 
   @Override
   public SpeechletResponse onLaunch(SpeechletRequestEnvelope<LaunchRequest> speechletRequestEnvelope) {
-    return getAskResponse("Foodle", "Foodle launched!");
+    return getAskResponse("Foodle", "Fuudel gestartet!");
   }
 
   @Override
