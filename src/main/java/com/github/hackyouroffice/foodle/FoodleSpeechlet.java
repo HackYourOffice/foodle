@@ -43,7 +43,7 @@ public class FoodleSpeechlet implements SpeechletV2 {
         if (GENERAL_FOOD_INTEND_NAME.equals(intentName)) {
 
             Proposal proposal = lunchProposer.getProposal();
-
+            session.removeAttribute("currentProposal");
             session.setAttribute("currentProposal", proposal);
 
             return getAskResponse(proposal.getTitle(), proposal.getSpeechText());
