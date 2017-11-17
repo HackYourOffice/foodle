@@ -13,13 +13,13 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-@Ignore
 public class GooglePlacesLunchLocationFinderUnitTest {
 
     FoodleProperties properties = mock(FoodleProperties.class);
     GooglePlacesLunchLocationFinder finder;
 
     @Test
+    @Ignore
     public void findLocations() {
         when(properties.getGoogleMapsApiKey()).thenReturn("APIKEY");
         when(properties.getFoodleLocationLat()).thenReturn(49.011750);
