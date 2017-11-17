@@ -1,2 +1,2 @@
-GetAddress where do I live
-GetAddress whats my address
+LunchProposal Essensvorschlag
+LunchProposal Essen
