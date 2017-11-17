@@ -2,6 +2,8 @@ package com.github.hackyouroffice.foodle;
 
 import com.google.maps.*;
 import com.google.maps.model.LatLng;
+import com.google.maps.model.PlaceType;
+import com.google.maps.model.PlacesSearchResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,8 +24,36 @@ public class GooglePlacesLunchLocationFinder implements LocationFinder {
 
     @Override
     public Set<Location> findLocations() {
-        logger.info(PlacesApi.nearbySearchQuery(geoApiContext, new LatLng(49.010065, 8.353095)).toString());
-        return Collections.emptySet();
+        NearbySearchRequest request =
+                PlacesApi.nearbySearchQuery(geoApiContext, new LatLng(49.010065, 8.353095))
+                        .openNow(true)
+                        .radius(100) // Meter
+                        .type(PlaceType.FOOD, PlaceType.RESTAURANT);
 
+        PlacesSearchResult[] results;
+
+        try {
+            results = request.await().results;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptySet();
+        }
+
+        logger.info(String.format("Anzahl des Ergebnisses: %d", results.length));
+
+        if (results.length > 0) {
+
+            Set<Location> resultSet = Collections.emptySet();
+
+            for (PlacesSearchResult searchResult : results) {
+                Location location = new Location(searchResult.name);
+
+                resultSet.add(location);
+            }
+
+            return resultSet;
+        }
+
+        return Collections.emptySet();
     }
 }
