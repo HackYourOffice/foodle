@@ -27,6 +27,6 @@ public class Proposal implements Serializable{
     }
 
     public String getAverageMinutesForEating() {
-        return "Essen da dauert so lange: " + location.getAverageMinutesForEating();
+        return "Normalerweise dauert das Essen dort " + location.getAverageMinutesForEating() +" Minuten";
     }
 }
