@@ -9,7 +9,7 @@ public class Location {
     private int averageMinutesForEating;
     private boolean openNow;
     private boolean permanentlyClosed;
-    private int wayTime = -1;
+    private long wayTimeInMinutes = -1;
 
     public Location(String name, String address, int averageMinutesForEating, boolean openNow, boolean permanentlyClosed) {
         this.name = name;
@@ -38,21 +38,21 @@ public class Location {
     }
 
     public String getWayTimeInfoText() {
-        if (wayTime == -1) {
+        if (wayTimeInMinutes == -1) {
             return "Ich kenne den Weg leider nicht so genau und weiss nicht wie lange du brauchst.";
         }
 
-        return String.format("Du wirst in etwa %d Minuten benötigen um dahin zu kommen. ", wayTime);
+        return String.format("Du wirst in etwa %d Minuten benötigen um dahin zu kommen. ", wayTimeInMinutes);
     }
 
-    public void setWayTime(int wayTime) {
-        this.wayTime = wayTime;
+    public void setWayTimeInSeconds(long wayTime) {
+        this.wayTimeInMinutes = wayTime / 60;
     }
 
     public String getTotalTimeNeededText() {
         int time = getAverageMinutesForEating();
-        if (wayTime != -1) {
-            time += 2 * wayTime;
+        if (wayTimeInMinutes != -1) {
+            time += 2 * wayTimeInMinutes;
         }
 
         return String.format("Normalerweise benötigst du dabei also insgesamt %d Minuten. ", time);
