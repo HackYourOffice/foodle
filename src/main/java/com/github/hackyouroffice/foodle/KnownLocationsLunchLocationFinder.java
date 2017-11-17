@@ -12,8 +12,8 @@ public class KnownLocationsLunchLocationFinder implements LocationFinder {
 
         String kauflandAdresse = "Carl-Metz-Straße 7, 76185 Karlsruhe";
         locations.add(new Location("Ritter", "Hardtstraße 25, 76185 Karlsruhe", 60, true));
-        locations.add(new Location("Kaufland Asiat", kauflandAdresse, 20, true));
-        locations.add(new Location("Kaufland Döner", kauflandAdresse, 20, true));
+        locations.add(new Location("Asiate im Kaufland", kauflandAdresse, 20, true));
+        locations.add(new Location("Döner im Kaufland", kauflandAdresse, 20, true));
         locations.add(new Location("Anderer Döner", kauflandAdresse, 35, true));
         locations.add(new Location("Curry76", "Rheinstraße 28, 76185 Karlsruhe", 25, true));
         locations.add(new Location("Thai", "Eckenerstraße 1, 76185 Karlsruhe", 60, true));
