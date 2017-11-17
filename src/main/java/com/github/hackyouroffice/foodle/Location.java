@@ -47,7 +47,7 @@ public class Location implements Serializable{
     }
 
     public void setWayTimeInSeconds(long wayTime) {
-        this.wayTimeInMinutes = wayTime / 60;
+        wayTimeInMinutes = wayTime / 60;
     }
 
     public String getTotalTimeNeededText() {
@@ -57,6 +57,10 @@ public class Location implements Serializable{
         }
 
         return String.format("Normalerweise benötigst du dabei also insgesamt %d Minuten. ", time);
+    }
+
+    public long getWayTimeInMinutes() {
+        return wayTimeInMinutes;
     }
 
     @Override

@@ -2,7 +2,6 @@ package com.github.hackyouroffice.foodle;
 
 import com.google.maps.GeoApiContext;
 import com.google.maps.model.*;
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -74,7 +73,7 @@ public class GooglePlacesLunchLocationFinder implements LocationFinder {
 
         firstDistanceRow.ifPresent(row -> {
             Optional<DistanceMatrixElement> firstElement = Arrays.stream(row.elements).findFirst();
-            firstElement.ifPresent(element-> location.setWayTimeInSeconds(element.durationInTraffic.inSeconds));
+            firstElement.ifPresent(element-> location.setWayTimeInSeconds(element.duration.inSeconds));
         });
     }
 
@@ -84,7 +83,7 @@ public class GooglePlacesLunchLocationFinder implements LocationFinder {
                         .origins(latLng)
                         .destinations(location.getAddress())
                         .mode(TravelMode.WALKING)
-                        .departureTime(DateTime.now())
+                        //.departureTime(DateTime.now())
                         .await()
                         .rows)
                         .findFirst();
