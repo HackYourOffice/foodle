@@ -12,6 +12,7 @@ LunchDuration Wieviel Zeit brauchen wir
 LunchDuration Dauer
 DeployProd Deploye Produktion
 DeployProd Produktion
+DeployProd Deploy
 UnhandledIntent a
 UnhandledIntent basd fasd
 UnhandledIntent cat video fun
