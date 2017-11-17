@@ -32,6 +32,6 @@ public class LunchProposer {
 
         LOG.info("Selected {} as location proposal.", selectedLocation);
 
-        return new Proposal("Essen", selectedLocation.getName());
+        return new Proposal("Essensvorschlag", selectedLocation.getName());
     }
 }
