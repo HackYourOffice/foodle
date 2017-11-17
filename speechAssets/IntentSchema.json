@@ -13,6 +13,9 @@
       "intent": "UnhandledIntent"
     },
     {
+      "intent": "DeployProd"
+    },
+    {
       "intent": "AMAZON.HelpIntent"
     },
     {
