@@ -37,8 +37,8 @@ public class LunchProposerTest {
     @Test
     public void getProposal() throws Exception {
 
-        when(knownLocationsLunchLocationFinder.findLocations()).thenReturn(Arrays.asList(new Location("a", "",0,true,false)));
-        when(googlePlacesLunchLocationFinder.findLocations()).thenReturn(Arrays.asList(new Location("b","",0,true,false)));
+        when(knownLocationsLunchLocationFinder.findLocations()).thenReturn(Arrays.asList(new Location("a", "",0,true)));
+        when(googlePlacesLunchLocationFinder.findLocations()).thenReturn(Arrays.asList(new Location("b","",0,true)));
         when(proposalPrefixTextRandomizer.randomTextPrefix()).thenReturn("blubb");
 
         final Proposal proposal = lunchProposer.getProposal();

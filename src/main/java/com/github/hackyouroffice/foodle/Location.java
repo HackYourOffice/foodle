@@ -9,10 +9,9 @@ public class Location implements Serializable{
     private String address;
     private int averageMinutesForEating;
     private boolean openNow;
-    private boolean permanentlyClosed;
     private long wayTimeInMinutes = -1;
 
-    public Location(String name, String address, int averageMinutesForEating, boolean openNow, boolean permanentlyClosed) {
+    public Location(String name, String address, int averageMinutesForEating, boolean openNow) {
         this.name = name;
         this.address = address;
         this.averageMinutesForEating = averageMinutesForEating;

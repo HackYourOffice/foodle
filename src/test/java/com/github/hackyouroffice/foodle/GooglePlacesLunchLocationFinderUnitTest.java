@@ -42,7 +42,7 @@ public class GooglePlacesLunchLocationFinderUnitTest {
         when(properties.getFoodleLocationLng()).thenReturn(8.350571);
         when(properties.getFoodleLocationRadius()).thenReturn(500);
 
-        Location location = new Location("die location", "Carl-Metz-Straße 7, 76185 Karlsruhe", 30, true, false);
+        Location location = new Location("die location", "Carl-Metz-Straße 7, 76185 Karlsruhe", 30, true);
 
         finder = new GooglePlacesLunchLocationFinder(properties);
 

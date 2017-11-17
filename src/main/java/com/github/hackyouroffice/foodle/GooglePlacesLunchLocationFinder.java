@@ -39,6 +39,7 @@ public class GooglePlacesLunchLocationFinder implements LocationFinder {
                     .type(PlaceType.RESTAURANT)
                     .await()
                     .results)
+                    .filter(result -> result.permanentlyClosed)
                     .map(this::mapSearchResultToLocation)
                     .collect(Collectors.toList());
 
@@ -54,7 +55,7 @@ public class GooglePlacesLunchLocationFinder implements LocationFinder {
         if(result.openingHours != null && !result.openingHours.openNow){
             openNow = false;
         }
-        return new Location(result.name, result.vicinity, 30, openNow, result.permanentlyClosed);
+        return new Location(result.name, result.vicinity, 30, openNow);
     }
 
     public void calculateDistanceToLocation(Location location) {
