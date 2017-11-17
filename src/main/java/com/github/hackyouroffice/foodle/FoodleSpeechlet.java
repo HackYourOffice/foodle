@@ -7,6 +7,7 @@ import com.amazon.speech.ui.OutputSpeech;
 import com.amazon.speech.ui.PlainTextOutputSpeech;
 import com.amazon.speech.ui.Reprompt;
 import com.amazon.speech.ui.SimpleCard;
+import com.google.gson.Gson;
 
 public class FoodleSpeechlet implements SpeechletV2 {
 
@@ -15,6 +16,7 @@ public class FoodleSpeechlet implements SpeechletV2 {
     private static final String DURATION_INTEND_NAME = "LunchDuration";
 
     private final LunchProposer lunchProposer;
+    private final Gson gson = new Gson();
 
 
     public FoodleSpeechlet(LunchProposer lunchProposer) {
@@ -43,20 +45,19 @@ public class FoodleSpeechlet implements SpeechletV2 {
         if (GENERAL_FOOD_INTEND_NAME.equals(intentName)) {
 
             Proposal proposal = lunchProposer.getProposal();
-            session.removeAttribute("currentProposal");
-            session.setAttribute("currentProposal", proposal);
+
+            session.setAttribute("currentProposal", gson.toJson(proposal));
 
             return getAskResponse(proposal.getTitle(), proposal.getSpeechText());
 
         } else if (DISTANCE_INTEND_NAME.equals(intentName)) {
 
-            Proposal currentProposal = (Proposal) session.getAttribute("currentProposal");
-
+            Proposal currentProposal = gson.fromJson((String) session.getAttribute("currentProposal"),Proposal.class);
             return getAskResponse("Distance", currentProposal.getWayTimeInfoText());
 
         } else if (DURATION_INTEND_NAME.equals(intentName)) {
 
-            Proposal currentProposal = (Proposal) session.getAttribute("currentProposal");
+            Proposal currentProposal = gson.fromJson((String) session.getAttribute("currentProposal"),Proposal.class);
 
             return getAskResponse("Duration", currentProposal.getAverageMinutesForEating());
 

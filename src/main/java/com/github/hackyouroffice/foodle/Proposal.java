@@ -1,6 +1,8 @@
 package com.github.hackyouroffice.foodle;
 
-public class Proposal {
+import java.io.Serializable;
+
+public class Proposal implements Serializable{
 
     private final String title;
     private final Location location;

@@ -1,8 +1,9 @@
 package com.github.hackyouroffice.foodle;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Location {
+public class Location implements Serializable{
 
     private String name;
     private String address;
