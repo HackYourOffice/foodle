@@ -11,7 +11,11 @@ import com.amazon.speech.ui.SimpleCard;
 public class FoodleSpeechlet implements SpeechletV2 {
 
     private static final String GENERAL_FOOD_INTEND_NAME = "LunchProposal";
+    private static final String DISTANCE_INTEND_NAME = "LunchDistance";
+    private static final String RATING_INTEND_NAME = "LunchRating";
+
     private final LunchProposer lunchProposer;
+
 
     public FoodleSpeechlet(LunchProposer lunchProposer) {
         this.lunchProposer = lunchProposer;
@@ -31,6 +35,7 @@ public class FoodleSpeechlet implements SpeechletV2 {
     public SpeechletResponse onIntent(SpeechletRequestEnvelope<IntentRequest> speechletRequestEnvelope) {
 
         IntentRequest request = speechletRequestEnvelope.getRequest();
+        final Session session = speechletRequestEnvelope.getSession();
 
         Intent intent = request.getIntent();
         String intentName = (intent != null) ? intent.getName() : null;
@@ -40,7 +45,22 @@ public class FoodleSpeechlet implements SpeechletV2 {
             Proposal proposal = lunchProposer.getProposal();
             ProposalPrefixTextRandomizer prefixForProposal = new ProposalPrefixTextRandomizer();
 
+            session.setAttribute("currentProposal", proposal);
+
             return getAskResponse(proposal.getTitle(), prefixForProposal.randomTextPrefix() + proposal.getLocation().getName());
+
+        } else if (DISTANCE_INTEND_NAME.equals(intentName)) {
+
+            Proposal currentProposal = (Proposal) session.getAttribute("currentProposal");
+
+            return getAskResponse("Distance", currentProposal.getLocation().getWayTimeInfoText());
+
+        } else if (RATING_INTEND_NAME.equals(intentName)) {
+
+            Proposal currentProposal = (Proposal) session.getAttribute("currentProposal");
+
+            // TODO use rating
+            return getAskResponse("Rating", "Essen da dauert so lange: " + currentProposal.getLocation().getAverageMinutesForEating());
 
         } else if ("AMAZON.StopIntent".equals(intentName)) {
             PlainTextOutputSpeech outputSpeech = new PlainTextOutputSpeech();
@@ -52,7 +72,6 @@ public class FoodleSpeechlet implements SpeechletV2 {
             outputSpeech.setText("Bis bald");
 
             return SpeechletResponse.newTellResponse(outputSpeech);
-
         } else {
             return getAskResponse("Nicht Verstanden", "Aaaalter, sprichst du Hochdeutsch?");
         }
