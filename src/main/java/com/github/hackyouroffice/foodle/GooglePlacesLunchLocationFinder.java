@@ -22,8 +22,6 @@ public class GooglePlacesLunchLocationFinder implements LocationFinder {
     private final int radius;
 
     public GooglePlacesLunchLocationFinder(FoodleProperties foodleProperties) {
-        logger.info(String.format("Google API Key: %s", foodleProperties.getGoogleMapsApiKey()));
-
         geoApiContext = new GeoApiContext.Builder()
                 .apiKey(foodleProperties.getGoogleMapsApiKey())
                 .build();
