@@ -10,10 +10,10 @@ import com.amazon.speech.ui.SimpleCard;
 
 public class FoodleSpeechlet implements SpeechletV2 {
 
-  private final RandomLunchProposer randomLunchProposer;
+  private final KnownLocationsLunchProposer knownLocationsLunchProposer;
 
-  public FoodleSpeechlet(RandomLunchProposer randomLunchProposer) {
-    this.randomLunchProposer = randomLunchProposer;
+  public FoodleSpeechlet(KnownLocationsLunchProposer knownLocationsLunchProposer) {
+    this.knownLocationsLunchProposer = knownLocationsLunchProposer;
   }
 
   @Override
@@ -38,7 +38,7 @@ public class FoodleSpeechlet implements SpeechletV2 {
 
     if ("LunchProposal".equals(intentName)) {
 
-      Proposal proposal = randomLunchProposer.propose();
+      Proposal proposal = knownLocationsLunchProposer.propose();
 
       return getAskResponse(proposal.getTitle(), proposal.getText());
     } else {

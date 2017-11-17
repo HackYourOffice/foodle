@@ -15,7 +15,7 @@ import static org.mockito.Mockito.when;
 public class FoodleSpeechletTest {
 
   @Mock
-  private RandomLunchProposer lunchProposer;
+  private KnownLocationsLunchProposer lunchProposer;
 
   @Test
   public void onIntent() throws Exception {

@@ -19,6 +19,6 @@ public final class FoodleStreamHandler extends SpeechletRequestStreamHandler {
     }
 
     public FoodleStreamHandler() {
-        super(new FoodleSpeechlet(new RandomLunchProposer()), supportedApplicationIds);
+        super(new FoodleSpeechlet(new KnownLocationsLunchProposer()), supportedApplicationIds);
     }
 }
