@@ -12,7 +12,7 @@ public class FoodleSpeechlet implements SpeechletV2 {
 
     private static final String GENERAL_FOOD_INTEND_NAME = "LunchProposal";
     private static final String DISTANCE_INTEND_NAME = "LunchDistance";
-    private static final String RATING_INTEND_NAME = "LunchRating";
+    private static final String DURATION_INTEND_NAME = "LunchDuration";
 
     private final LunchProposer lunchProposer;
 
@@ -55,12 +55,11 @@ public class FoodleSpeechlet implements SpeechletV2 {
 
             return getAskResponse("Distance", currentProposal.getLocation().getWayTimeInfoText());
 
-        } else if (RATING_INTEND_NAME.equals(intentName)) {
+        } else if (DURATION_INTEND_NAME.equals(intentName)) {
 
             Proposal currentProposal = (Proposal) session.getAttribute("currentProposal");
 
-            // TODO use rating
-            return getAskResponse("Rating", "Essen da dauert so lange: " + currentProposal.getLocation().getAverageMinutesForEating());
+            return getAskResponse("Duration", "Essen da dauert so lange: " + currentProposal.getLocation().getAverageMinutesForEating());
 
         } else if ("AMAZON.StopIntent".equals(intentName)) {
             PlainTextOutputSpeech outputSpeech = new PlainTextOutputSpeech();

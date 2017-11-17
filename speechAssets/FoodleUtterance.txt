@@ -5,10 +5,12 @@ LunchProposal Was gibt es heute
 LunchProposal Was gibt's heute
 LunchProposal Futter
 LunchDistance Und wie weit
-LunchDistance Wie lange brauchen wir
 LunchDistance Entfernung
 LunchDistance Wie weit
 LunchDistance Ist das weit?
+LunchDuration Wie lange brauchen wir
+LunchDuration Dauer
+LunchDuration Zeit
 UnhandledIntent a
 UnhandledIntent basd fasd
 UnhandledIntent cat video fun
@@ -19,6 +21,4 @@ UnhandledIntent hand on
 UnhandledIntent faul
 UnhandledIntent hat
 UnhandledIntent hammer
-LunchRating Rating
-LunchRating Bewertung
-LunchRating bewertet
+

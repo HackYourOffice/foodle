@@ -7,10 +7,10 @@
       "intent": "LunchDistance"
     },
     {
-      "intent": "UnhandledIntent"
+      "intent": "LunchDuration"
     },
     {
-      "intent": "LunchRating"
+      "intent": "UnhandledIntent"
     },
     {
       "intent": "AMAZON.HelpIntent"
