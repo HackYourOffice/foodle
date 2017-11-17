@@ -10,6 +10,12 @@ import com.amazon.speech.ui.SimpleCard;
 
 public class FoodleSpeechlet implements SpeechletV2 {
 
+  private final LunchProposer lunchProposer;
+
+  public FoodleSpeechlet(LunchProposer lunchProposer) {
+    this.lunchProposer = lunchProposer;
+  }
+
   @Override
   public void onSessionStarted(SpeechletRequestEnvelope<SessionStartedRequest> speechletRequestEnvelope) {
 
@@ -22,6 +28,7 @@ public class FoodleSpeechlet implements SpeechletV2 {
 
   @Override
   public SpeechletResponse onIntent(SpeechletRequestEnvelope<IntentRequest> speechletRequestEnvelope) {
+
     IntentRequest request = speechletRequestEnvelope.getRequest();
 //    log.info("onIntent requestId={}, sessionId={}", request.getRequestId(),
 //        requestEnvelope.getSession().getSessionId());
@@ -31,7 +38,9 @@ public class FoodleSpeechlet implements SpeechletV2 {
 
     if ("LunchProposal".equals(intentName)) {
 
-      return getAskResponse("Essensvorschlag", "Essen gibt's da drüben!");
+      Proposal proposal = lunchProposer.propose();
+
+      return getAskResponse(proposal.getTitle(), proposal.getText());
     } else {
       return getAskResponse("HelloWorld", "This is unsupported. Please try something else.");
     }
