@@ -52,7 +52,7 @@ public class FoodleSpeechlet implements SpeechletV2 {
         return SpeechletResponse.newTellResponse(outputSpeech);
 
     } else {
-      return getAskResponse("NichtVerstanden", "Ich habe dich leider nicht vertstanden, bitte frag mich nochmal.");
+      return getAskResponse("NichtVerstanden", "Ich habe dich leider nicht verstanden, bitte frag mich nochmal.");
     }
   }
 
