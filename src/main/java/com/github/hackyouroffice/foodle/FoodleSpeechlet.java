@@ -34,7 +34,7 @@ public class FoodleSpeechlet implements SpeechletV2 {
     @Override
     public SpeechletResponse onLaunch(SpeechletRequestEnvelope<LaunchRequest> speechletRequestEnvelope) {
         return getAskWithSsmlResponse("Foodle",
-                "Fuudel gestartet! <say-as interpret-as=\"interjection\">ding dong</say-as>");
+                "<speak> Fuudel gestartet! <say-as interpret-as=\"interjection\">ding dong</say-as> </speak>");
     }
 
     @Override
