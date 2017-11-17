@@ -38,7 +38,7 @@ public class FoodleSpeechlet implements SpeechletV2 {
     if (GENERAL_FOOD_INTEND_NAME.equals(intentName)) {
 
       Proposal proposal = lunchProposer.getProposal();
-      return getAskResponse(proposal.getTitle(), proposal.getText());
+      return getAskResponse(proposal.getTitle(), "Geh heute mal zu: " + proposal.getText());
 
     } else if ("AMAZON.StopIntent".equals(intentName)) {
         PlainTextOutputSpeech outputSpeech = new PlainTextOutputSpeech();
