@@ -38,10 +38,21 @@ public class FoodleSpeechlet implements SpeechletV2 {
     if (GENERAL_FOOD_INTEND_NAME.equals(intentName)) {
 
       Proposal proposal = lunchProposer.getProposal();
-
       return getAskResponse(proposal.getTitle(), proposal.getText());
+
+    } else if ("AMAZON.StopIntent".equals(intentName)) {
+        PlainTextOutputSpeech outputSpeech = new PlainTextOutputSpeech();
+        outputSpeech.setText("Bis bald");
+
+        return SpeechletResponse.newTellResponse(outputSpeech);
+    } else if ("AMAZON.CancelIntent".equals(intentName)) {
+        PlainTextOutputSpeech outputSpeech = new PlainTextOutputSpeech();
+        outputSpeech.setText("Bis bald");
+
+        return SpeechletResponse.newTellResponse(outputSpeech);
+
     } else {
-      return getAskResponse("HelloWorld", "This is unsupported. Please try something else.");
+      return getAskResponse("NichtVerstanden", "Ich habe dich leider nicht vertstanden, bitte frag mich nochmal.");
     }
   }
 
