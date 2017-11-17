@@ -10,6 +10,7 @@ LunchDuration Wie lange dauert das
 LunchDuration Wie lange brauchen wir zum Essen
 LunchDuration Wieviel Zeit brauchen wir
 LunchDuration Dauer
+DeployProd Deploye Produktion
 UnhandledIntent a
 UnhandledIntent basd fasd
 UnhandledIntent cat video fun

@@ -73,6 +73,11 @@ public class FoodleSpeechlet implements SpeechletV2 {
             outputSpeech.setText("Over and out");
 
             return SpeechletResponse.newTellResponse(outputSpeech);
+        } else if ("DeployProd".equals(intentName)) {
+            PlainTextOutputSpeech outputSpeech = new PlainTextOutputSpeech();
+            outputSpeech.setText("In Ordnung, ich deploye vor dem Essen noch schnell alles auf Produktion");
+
+            return SpeechletResponse.newTellResponse(outputSpeech);
         } else {
             return getAskResponse("Nicht Verstanden", "Aaaalter, sprichst du Hochdeutsch?");
         }
