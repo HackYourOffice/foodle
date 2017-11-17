@@ -1,6 +1,6 @@
 package com.github.hackyouroffice.foodle;
 
-import com.google.maps.*;
+import com.google.maps.GeoApiContext;
 import com.google.maps.model.*;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.google.maps.DistanceMatrixApi.*;
-import static com.google.maps.PlacesApi.*;
+import static com.google.maps.DistanceMatrixApi.newRequest;
+import static com.google.maps.PlacesApi.nearbySearchQuery;
 
 public class GooglePlacesLunchLocationFinder implements LocationFinder {
 
@@ -51,11 +51,11 @@ public class GooglePlacesLunchLocationFinder implements LocationFinder {
     }
 
     private Location mapSearchResultToLocation(PlacesSearchResult result){
-
+        boolean openNow = true;
         if(result.openingHours != null && !result.openingHours.openNow){
-            return new Location(result.name, result.formattedAddress, 3, false, result.permanentlyClosed);
+            openNow = false;
         }
-        return new Location(result.name, result.formattedAddress, 3, true, result.permanentlyClosed);
+        return new Location(result.name, result.formattedAddress, 3, openNow, result.permanentlyClosed);
     }
 
     public void calculateDistanceToLocation(Location location) {

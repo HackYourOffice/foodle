@@ -34,12 +34,12 @@ public class LunchProposerTest {
     @Test
     public void getProposal() throws Exception {
 
-        when(knownLocationsLunchLocationFinder.findLocations()).thenReturn(Arrays.asList(new Location("a")));
-        when(googlePlacesLunchLocationFinder.findLocations()).thenReturn(Arrays.asList(new Location("b")));
+        when(knownLocationsLunchLocationFinder.findLocations()).thenReturn(Arrays.asList(new Location("a", "",0,true,false)));
+        when(googlePlacesLunchLocationFinder.findLocations()).thenReturn(Arrays.asList(new Location("b","",0,true,false)));
 
         final Proposal proposal = lunchProposer.getProposal();
 
-        assertThat(proposal.getText(), is(anything()));
+        assertThat(proposal.getLocation().getName(), is(anything()));
 
         verify(googlePlacesLunchLocationFinder).findLocations();
         verify(knownLocationsLunchLocationFinder).findLocations();
