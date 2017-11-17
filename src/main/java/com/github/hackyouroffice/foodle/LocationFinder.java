@@ -1,8 +1,8 @@
 package com.github.hackyouroffice.foodle;
 
-import java.util.Set;
+import java.util.List;
 
 public interface LocationFinder {
 
-    Set<Location> findLocations();
+    List<Location> findLocations();
 }

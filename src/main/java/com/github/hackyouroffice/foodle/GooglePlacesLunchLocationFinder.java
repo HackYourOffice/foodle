@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Collections;
-import java.util.Set;
+import java.util.List;
 
 public class GooglePlacesLunchLocationFinder implements LocationFinder {
 
@@ -18,19 +18,19 @@ public class GooglePlacesLunchLocationFinder implements LocationFinder {
     private final GeoApiContext geoApiContext;
 
     public GooglePlacesLunchLocationFinder(FoodleProperties foodleProperties) {
-        geoApiContext = new GeoApiContext.Builder()
-                .apiKey(foodleProperties.getGoogleMapsApiKey())
-                .build();
+        this.geoApiContext = new GeoApiContext.Builder()
+            .apiKey(foodleProperties.getGoogleMapsApiKey())
+            .build();
 
     }
 
     @Override
-    public Set<Location> findLocations() {
+    public List<Location> findLocations() {
         NearbySearchRequest request =
-                PlacesApi.nearbySearchQuery(geoApiContext, new LatLng(49.010065, 8.353095))
-                        .openNow(true)
-                        .radius(100) // Meter
-                        .type(PlaceType.FOOD, PlaceType.RESTAURANT);
+            PlacesApi.nearbySearchQuery(geoApiContext, new LatLng(49.010065, 8.353095))
+                .openNow(true)
+                .radius(100) // Meter
+                .type(PlaceType.FOOD, PlaceType.RESTAURANT);
 
         PlacesSearchResult[] results;
 
@@ -38,12 +38,12 @@ public class GooglePlacesLunchLocationFinder implements LocationFinder {
             results = request.await().results;
         } catch (Exception e) {
             e.printStackTrace();
-            return Collections.emptySet();
+            return Collections.emptyList();
         }
 
         logger.info(String.format("Anzahl des Ergebnisses: %d", results.length));
 
-        Set<Location> resultSet = Collections.emptySet();
+        List<Location> resultSet = Collections.emptyList();
 
         for (PlacesSearchResult searchResult : results) {
             Location location = new Location(searchResult.name);

@@ -1,23 +1,37 @@
 package com.github.hackyouroffice.foodle;
 
-import java.util.HashSet;
-import java.util.Set;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class LunchProposer {
 
-  private final GooglePlacesLunchLocationFinder googlePlacesLunchLocationFinder;
-  private final KnownLocationsLunchLocationFinder knownLocationsLunchLocationFinder;
+    private static final Logger LOG = LoggerFactory.getLogger(LunchProposer.class);
 
-  public LunchProposer(){
-    FoodleProperties properties = new FoodleProperties();
-    this.googlePlacesLunchLocationFinder = new GooglePlacesLunchLocationFinder(properties);
-    this. knownLocationsLunchLocationFinder = new KnownLocationsLunchLocationFinder();
-  }
+    private final GooglePlacesLunchLocationFinder googlePlacesLunchLocationFinder;
+    private final KnownLocationsLunchLocationFinder knownLocationsLunchLocationFinder;
 
-  public Proposal getProposal(){
-      Set<Location> locations = knownLocationsLunchLocationFinder.findLocations();
-      locations.addAll(googlePlacesLunchLocationFinder.findLocations());
-      // TODO get random location from all locations, pick one and return proposal
-      return new Proposal("Döner","immer gibt es döner.");
-  }
+    public LunchProposer(GooglePlacesLunchLocationFinder googlePlacesLunchLocationFinder, KnownLocationsLunchLocationFinder knownLocationsLunchLocationFinder) {
+        this.googlePlacesLunchLocationFinder = googlePlacesLunchLocationFinder;
+        this.knownLocationsLunchLocationFinder = knownLocationsLunchLocationFinder;
+    }
+
+    public Proposal getProposal() {
+
+        List<Location> locations = new ArrayList<>();
+
+        locations.addAll(knownLocationsLunchLocationFinder.findLocations());
+        locations.addAll(googlePlacesLunchLocationFinder.findLocations());
+
+        Collections.shuffle(locations);
+
+        final Location selectedLocation = locations.get(0);
+
+        LOG.info("Selected {} as location proposal.", selectedLocation);
+
+        return new Proposal("Essen", selectedLocation.getName());
+    }
 }
