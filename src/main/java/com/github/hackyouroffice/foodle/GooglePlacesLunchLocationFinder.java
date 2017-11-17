@@ -1,6 +1,8 @@
 package com.github.hackyouroffice.foodle;
 
-import com.google.maps.*;
+import com.google.maps.GeoApiContext;
+import com.google.maps.NearbySearchRequest;
+import com.google.maps.PlacesApi;
 import com.google.maps.model.LatLng;
 import com.google.maps.model.PlaceType;
 import com.google.maps.model.PlacesSearchResult;
@@ -16,7 +18,7 @@ public class GooglePlacesLunchLocationFinder implements LocationFinder {
     private final GeoApiContext geoApiContext;
 
     public GooglePlacesLunchLocationFinder(FoodleProperties foodleProperties) {
-        this.geoApiContext = new GeoApiContext.Builder()
+        geoApiContext = new GeoApiContext.Builder()
                 .apiKey(foodleProperties.getGoogleMapsApiKey())
                 .build();
 
@@ -41,19 +43,14 @@ public class GooglePlacesLunchLocationFinder implements LocationFinder {
 
         logger.info(String.format("Anzahl des Ergebnisses: %d", results.length));
 
-        if (results.length > 0) {
+        Set<Location> resultSet = Collections.emptySet();
 
-            Set<Location> resultSet = Collections.emptySet();
+        for (PlacesSearchResult searchResult : results) {
+            Location location = new Location(searchResult.name);
 
-            for (PlacesSearchResult searchResult : results) {
-                Location location = new Location(searchResult.name);
-
-                resultSet.add(location);
-            }
-
-            return resultSet;
+            resultSet.add(location);
         }
 
-        return Collections.emptySet();
+        return resultSet;
     }
 }
