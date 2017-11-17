@@ -33,11 +33,7 @@ public class FoodleSpeechlet implements SpeechletV2 {
 
     @Override
     public SpeechletResponse onLaunch(SpeechletRequestEnvelope<LaunchRequest> speechletRequestEnvelope) {
-        SsmlOutputSpeech outputSpeech = new SsmlOutputSpeech();
-        String speechOutput = "<amazon:effect name=\"whispered\">gestartet!</amazon:effect>";
-        outputSpeech.setSsml("<speak> Fuudel " + speechOutput + "</speak>");
-
-        return SpeechletResponse.newTellResponse(outputSpeech);
+        return getAskResponse("Foodle", "Fuudel gestartet!");
     }
 
     @Override
