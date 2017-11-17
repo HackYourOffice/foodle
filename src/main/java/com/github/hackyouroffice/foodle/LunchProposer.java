@@ -32,6 +32,8 @@ public class LunchProposer {
 
         LOG.info("Selected {} as location proposal.", selectedLocation);
 
-        return new Proposal("Essensvorschlag", selectedLocation.getName());
+        googlePlacesLunchLocationFinder.calculateDistanceToLocation(selectedLocation);
+
+        return new Proposal("Essensvorschlag", selectedLocation);
     }
 }
