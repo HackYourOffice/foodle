@@ -55,7 +55,7 @@ public class GooglePlacesLunchLocationFinder implements LocationFinder {
         if(result.openingHours != null && !result.openingHours.openNow){
             openNow = false;
         }
-        return new Location(result.name, result.vicinity, 3, openNow, result.permanentlyClosed);
+        return new Location(result.name, result.vicinity, 30, openNow, result.permanentlyClosed);
     }
 
     public void calculateDistanceToLocation(Location location) {
