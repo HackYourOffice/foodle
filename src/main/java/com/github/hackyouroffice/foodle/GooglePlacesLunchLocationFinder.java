@@ -9,8 +9,10 @@ import com.google.maps.model.PlacesSearchResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GooglePlacesLunchLocationFinder implements LocationFinder {
 
@@ -47,14 +49,6 @@ public class GooglePlacesLunchLocationFinder implements LocationFinder {
 
         logger.info(String.format("Anzahl des Ergebnisses: %d", results.length));
 
-        List<Location> resultSet = Collections.emptyList();
-
-        for (PlacesSearchResult searchResult : results) {
-            Location location = new Location(searchResult.name);
-
-            resultSet.add(location);
-        }
-
-        return resultSet;
+        return Arrays.stream(results).map(x -> new Location(x.name)).collect(Collectors.toList());
     }
 }
