@@ -66,7 +66,7 @@ public class FoodleSpeechlet implements SpeechletV2 {
 
             Proposal currentProposal = gson.fromJson((String) session.getAttribute("currentProposal"),Proposal.class);
 
-            return getAskResponse("Duration", currentProposal.getAverageMinutesForEating());
+            return getAskResponse("Duration", currentProposal.getCompleteLunchDuration());
 
         } else if ("AMAZON.StopIntent".equals(intentName)) {
             PlainTextOutputSpeech outputSpeech = new PlainTextOutputSpeech();

@@ -9,6 +9,9 @@ LunchDistance Entfernung
 LunchDistance Wie weit
 LunchDistance Ist das weit?
 LunchDuration Wie lange brauchen wir
+LunchDuration Wie lange brauchen insgesamt zum Essen
+LunchDuration Wie lange dauert das Essen
+LunchDuration Wieviel Zeit brauchen wir
 LunchDuration Dauer
 LunchDuration Zeit
 UnhandledIntent a

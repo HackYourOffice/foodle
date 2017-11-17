@@ -25,18 +25,6 @@ public class Location implements Serializable{
         return address;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public int getAverageMinutesForEating() {
-        return averageMinutesForEating;
-    }
-
-    public void setAverageMinutesForEating(int averageMinutesForEating) {
-        this.averageMinutesForEating = averageMinutesForEating;
-    }
-
     public String getWayTimeInfoText() {
         if (wayTimeInMinutes == -1) {
             return "Ich kenne den Weg leider nicht so genau und weiss nicht wie lange du brauchst.";
@@ -49,13 +37,13 @@ public class Location implements Serializable{
         wayTimeInMinutes = wayTime / 60;
     }
 
-    public String getTotalTimeNeededText() {
-        int time = getAverageMinutesForEating();
+    public String getCompleteLunchDuration() {
+        int time = averageMinutesForEating;
         if (wayTimeInMinutes != -1) {
             time += 2 * wayTimeInMinutes;
         }
 
-        return String.format("Normalerweise benötigst du dabei also insgesamt %d Minuten. ", time);
+        return String.format("Normalerweise benötigst du dabei also insgesamt %d Minuten zum Essen inklusive Wegzeit ", time);
     }
 
     public long getWayTimeInMinutes() {

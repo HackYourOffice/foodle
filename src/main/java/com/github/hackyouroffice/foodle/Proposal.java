@@ -26,7 +26,7 @@ public class Proposal implements Serializable{
         return location.getWayTimeInfoText();
     }
 
-    public String getAverageMinutesForEating() {
-        return "Normalerweise dauert das Essen dort " + location.getAverageMinutesForEating() +" Minuten";
+    public String getCompleteLunchDuration() {
+        return location.getCompleteLunchDuration();
     }
 }
