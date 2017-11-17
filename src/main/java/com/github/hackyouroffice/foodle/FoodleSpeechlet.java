@@ -64,12 +64,12 @@ public class FoodleSpeechlet implements SpeechletV2 {
 
         } else if ("AMAZON.StopIntent".equals(intentName)) {
             PlainTextOutputSpeech outputSpeech = new PlainTextOutputSpeech();
-            outputSpeech.setText("Bis bald");
+            outputSpeech.setText("Ich bin raus");
 
             return SpeechletResponse.newTellResponse(outputSpeech);
         } else if ("AMAZON.CancelIntent".equals(intentName)) {
             PlainTextOutputSpeech outputSpeech = new PlainTextOutputSpeech();
-            outputSpeech.setText("Bis bald");
+            outputSpeech.setText("Over and out");
 
             return SpeechletResponse.newTellResponse(outputSpeech);
         } else {
