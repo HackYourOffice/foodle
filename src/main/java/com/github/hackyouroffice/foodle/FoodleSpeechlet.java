@@ -76,7 +76,7 @@ public class FoodleSpeechlet implements SpeechletV2 {
             return SpeechletResponse.newTellResponse(outputSpeech);
         } else if ("DeployProd".equals(intentName)) {
             PlainTextOutputSpeech outputSpeech = new PlainTextOutputSpeech();
-            outputSpeech.setText("In Ordnung, ich deploye vor dem Essen noch schnell alles auf Produktion");
+            outputSpeech.setText("In Ordnung, ich schiebe vor dem Essen noch schnell alles auf Produktion");
 
             return SpeechletResponse.newTellResponse(outputSpeech);
         } else {
