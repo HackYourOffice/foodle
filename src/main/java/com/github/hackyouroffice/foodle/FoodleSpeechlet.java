@@ -33,7 +33,8 @@ public class FoodleSpeechlet implements SpeechletV2 {
 
     @Override
     public SpeechletResponse onLaunch(SpeechletRequestEnvelope<LaunchRequest> speechletRequestEnvelope) {
-        return getAskResponse("Foodle", "Fuudel gestartet!");
+        return getAskWithSsmlResponse("Foodle",
+                "Fuudel gestartet! <say-as interpret-as=\"interjection\">ding dong</say-as>");
     }
 
     @Override
@@ -92,6 +93,15 @@ public class FoodleSpeechlet implements SpeechletV2 {
 
     }
 
+
+    private SpeechletResponse getAskWithSsmlResponse(String cardTitle, String speechText) {
+        SimpleCard card = getSimpleCard(cardTitle, speechText);
+        SsmlOutputSpeech speech = getSsmlTextOutputSpeech(speechText);
+        Reprompt reprompt = getReprompt(speech);
+
+        return SpeechletResponse.newAskResponse(speech, reprompt, card);
+    }
+
     /**
      * Helper method for retrieving an Ask response with a simple card and reprompt included.
      *
@@ -131,6 +141,13 @@ public class FoodleSpeechlet implements SpeechletV2 {
     private PlainTextOutputSpeech getPlainTextOutputSpeech(String speechText) {
         PlainTextOutputSpeech speech = new PlainTextOutputSpeech();
         speech.setText(speechText);
+
+        return speech;
+    }
+
+    private SsmlOutputSpeech getSsmlTextOutputSpeech(String speechText) {
+        SsmlOutputSpeech speech = new SsmlOutputSpeech();
+        speech.setSsml(speechText);
 
         return speech;
     }
