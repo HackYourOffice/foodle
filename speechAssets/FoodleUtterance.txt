@@ -1,19 +1,15 @@
 LunchProposal Essensvorschlag
-LunchProposal Essen
 LunchProposal Was essen wir heute
 LunchProposal Was gibt es heute
 LunchProposal Was gibt's heute
 LunchProposal Futter
-LunchDistance Und wie weit
 LunchDistance Entfernung
+LunchDistance Ist das weit
 LunchDistance Wie weit
-LunchDistance Ist das weit?
-LunchDuration Wie lange brauchen wir
-LunchDuration Wie lange brauchen insgesamt zum Essen
-LunchDuration Wie lange dauert das Essen
+LunchDuration Wie lange dauert das
+LunchDuration Wie lange brauchen wir zum Essen
 LunchDuration Wieviel Zeit brauchen wir
 LunchDuration Dauer
-LunchDuration Zeit
 UnhandledIntent a
 UnhandledIntent basd fasd
 UnhandledIntent cat video fun
