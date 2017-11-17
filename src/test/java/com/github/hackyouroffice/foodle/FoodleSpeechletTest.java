@@ -15,12 +15,12 @@ import static org.mockito.Mockito.when;
 public class FoodleSpeechletTest {
 
   @Mock
-  private KnownLocationsLunchProposer lunchProposer;
+  private LunchProposer lunchProposer;
 
   @Test
   public void onIntent() throws Exception {
 
-    when(lunchProposer.propose()).thenReturn(new Proposal("foo", "bar"));
+    when(lunchProposer.getProposal()).thenReturn(new Proposal("foo", "bar"));
 
     final FoodleSpeechlet foodleSpeechlet = new FoodleSpeechlet(lunchProposer);
 
@@ -28,7 +28,7 @@ public class FoodleSpeechletTest {
 
     foodleSpeechlet.onIntent(wrapIntend(intent));
 
-    verify(lunchProposer).propose();
+    verify(lunchProposer).getProposal();
   }
 
   private SpeechletRequestEnvelope<IntentRequest> wrapIntend(Intent intent) {

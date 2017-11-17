@@ -5,12 +5,15 @@ import com.google.maps.model.LatLng;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class GooglePlacesLunchProposer implements LunchProposer {
+import java.util.Collections;
+import java.util.Set;
 
-    private static final Logger logger = LoggerFactory.getLogger(GooglePlacesLunchProposer.class);
+public class GooglePlacesLunchLocationFinder implements LocationFinder {
+
+    private static final Logger logger = LoggerFactory.getLogger(GooglePlacesLunchLocationFinder.class);
     private final GeoApiContext geoApiContext;
 
-    public GooglePlacesLunchProposer(FoodleProperties foodleProperties) {
+    public GooglePlacesLunchLocationFinder(FoodleProperties foodleProperties) {
         this.geoApiContext = new GeoApiContext.Builder()
                 .apiKey(foodleProperties.getGoogleMapsApiKey())
                 .build();
@@ -18,8 +21,9 @@ public class GooglePlacesLunchProposer implements LunchProposer {
     }
 
     @Override
-    public Proposal propose() {
+    public Set<Location> findLocations() {
         logger.info(PlacesApi.nearbySearchQuery(geoApiContext, new LatLng(49.010065, 8.353095)).toString());
-        return null;
+        return Collections.emptySet();
+
     }
 }
