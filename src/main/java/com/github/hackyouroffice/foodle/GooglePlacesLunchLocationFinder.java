@@ -66,7 +66,7 @@ public class GooglePlacesLunchLocationFinder implements LocationFinder {
             setWayTimeIfApplicable(location, firstDistanceRow);
 
         } catch (Exception ex) {
-            logger.warn("Es konnte keine Dauer für die Reise zum Restaurant berechnet werden, Message: ", ex.getMessage());
+            logger.warn("Es konnte keine Dauer für die Reise zum Restaurant (" + location.getAddress() + ") berechnet werden, Message: ", ex.getMessage());
         }
     }
 
