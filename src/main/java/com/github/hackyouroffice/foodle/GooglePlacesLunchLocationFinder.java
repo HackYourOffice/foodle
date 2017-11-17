@@ -50,7 +50,7 @@ public class GooglePlacesLunchLocationFinder implements LocationFinder {
             return Collections.emptyList();
         }
 
-        logger.info(String.format("Anzahl des Ergebnisses: %d", results.length));
+        logger.info(String.format("Anzahl der Ergebnisse: %d", results.length));
 
         return Arrays.stream(results).map(x -> {
             return new Location(
