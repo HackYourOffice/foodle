@@ -2,7 +2,7 @@ package com.github.hackyouroffice.foodle.storage;
 
 import com.github.hackyouroffice.foodle.Location;
 
-public class ProposedLocation {
+public class ProposedLocation implements Comparable<ProposedLocation> {
 
     private Long timestamp;
     private Location location;
@@ -18,5 +18,11 @@ public class ProposedLocation {
 
     public Location getLocation() {
         return location;
+    }
+
+    @Override
+    public int compareTo(ProposedLocation o) {
+        // reverse sorting
+        return Long.compare(o.getTimestamp(), timestamp);
     }
 }
