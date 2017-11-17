@@ -4,6 +4,12 @@
       "intent": "LunchProposal"
     },
     {
+      "intent": "UnhandledIntent"
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+    },
+    {
       "intent": "AMAZON.StopIntent"
     },
     {

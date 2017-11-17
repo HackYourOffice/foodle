@@ -22,6 +22,8 @@ public class GooglePlacesLunchLocationFinder implements LocationFinder {
     private final int radius;
 
     public GooglePlacesLunchLocationFinder(FoodleProperties foodleProperties) {
+        logger.info(String.format("Google API Key: %s", foodleProperties.getGoogleMapsApiKey()));
+
         geoApiContext = new GeoApiContext.Builder()
                 .apiKey(foodleProperties.getGoogleMapsApiKey())
                 .build();
@@ -34,21 +36,26 @@ public class GooglePlacesLunchLocationFinder implements LocationFinder {
     public List<Location> findLocations() {
         NearbySearchRequest request =
                 PlacesApi.nearbySearchQuery(geoApiContext, latLng)
-                        .openNow(true)
+                        //.openNow(false)
                         .radius(radius) // Meter
-                        .type(PlaceType.FOOD, PlaceType.RESTAURANT);
+                        .type(PlaceType.RESTAURANT);
 
         PlacesSearchResult[] results;
 
         try {
             results = request.await().results;
         } catch (Exception e) {
+            logger.info("Die Liste von Google war leer");
             e.printStackTrace();
             return Collections.emptyList();
         }
 
-        logger.info(String.format("Anzahl des Ergebnisses: %d", results.length));
+        logger.info(String.format("Anzahl der Ergebnisse: %d", results.length));
 
-        return Arrays.stream(results).map(x -> new Location(x.name)).collect(Collectors.toList());
+        return Arrays.stream(results).map(x -> {
+            return new Location(
+                    String.format("%s%s", x.name, (x.openingHours != null ?
+                            String.format("hat gerade %s geöffnet!", x.openingHours.openNow ? "" : "nicht") : "")));
+        }).collect(Collectors.toList());
     }
 }

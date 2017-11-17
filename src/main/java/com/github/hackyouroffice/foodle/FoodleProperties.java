@@ -1,6 +1,7 @@
 package com.github.hackyouroffice.foodle;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 public class FoodleProperties {
@@ -10,9 +11,11 @@ public class FoodleProperties {
     public FoodleProperties() {
 
         properties = new Properties();
-        try {
-            properties.load(getClass().getResourceAsStream("foodle.properties"));
+        String resourceName = "foodle.properties";
+        ClassLoader loader = Thread.currentThread().getContextClassLoader();
 
+        try (InputStream resourceStream = loader.getResourceAsStream(resourceName)) {
+            properties.load(resourceStream);
         } catch (IOException e) {
             throw new RuntimeException("Foodle Properties could not be loaded: " + e.getMessage());
         }
